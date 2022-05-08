@@ -15,7 +15,7 @@ export const listTransaction = async (req, res) => {
 
     const transaction = await modelTransaction.find({ user_id_transaction: _id })
 
-    res.status(201).json(transaction)
+    res.status(200).json(transaction)
 
 
   } catch (error) {
