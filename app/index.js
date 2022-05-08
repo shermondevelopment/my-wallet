@@ -6,8 +6,12 @@ import connect from './setting/connect-db.js'
 /* router */
 import router from '../app/routes/index.js'
 
+/* cors */
+import cors from 'cors'
+
 /* server */
 const app = express()
+app.use(cors())
 app.use(json())
 app.use(router)
 
