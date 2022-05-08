@@ -26,7 +26,6 @@ export const addEntry = async (req, res) => {
 
 
   } catch (error) {
-    console.log(error)
     res.status(500).json({ error: 'internal server error' })
   }
 }
@@ -53,3 +52,16 @@ export const exitMoney = async (req, res) => {
     res.status(500).json({ error: 'internal server error' })
   }
 } 
+
+export const deleteTransaction = async  (req, res) => {
+    try {
+      const { idTransaction } = req.params
+      const { _id } = res.locals.user
+
+      await modelTransaction.findOneAndDelete({ _id: idTransaction }, { user_id_transaction: _id })
+      res.status(200).json({message: true})
+      res.status(200).send('deleted')
+    } catch (error) {
+      res.status(500).json({ error: 'internal server error' })
+    }
+}
