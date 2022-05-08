@@ -19,5 +19,5 @@ app.use(json())
 app.use(router)
 
 connect.then(  _ => {
- app.listen(5555, () => console.log('app running 🚀🚀🚀'))
+ app.listen(process.env.PORT || 5555, () => console.log('app running 🚀🚀🚀'))
 } ).catch(() => console.log('Ops... falha na conexão com o banco de dados 😵😵😵😵❌❌❌'))
