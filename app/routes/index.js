@@ -10,7 +10,7 @@ import authUser from '../middlewares/auth.js'
 import signupController from '../controllers/signupController.js'
 import signinController from '../controllers/signinController.js'
 
-import { addEntry, exitMoney, deleteTransaction } from '../controllers/transactionController.js'
+import { addEntry, exitMoney, deleteTransaction, editTransaction } from '../controllers/transactionController.js'
 
 
 /* signup */
@@ -23,5 +23,6 @@ router.post('/signin', signinController)
 router.post('/transaction/entry', authUser, addEntry)
 router.post('/transaction/exit', authUser, exitMoney)
 router.delete('/transaction/delete/:idTransaction', authUser, deleteTransaction)
+router.put('/transaction/edit/:idTransaction', authUser, editTransaction)
 
 export default router

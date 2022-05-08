@@ -69,3 +69,20 @@ export const deleteTransaction = async  (req, res) => {
       res.status(500).json({ error: 'internal server error' })
     }
 }
+
+export const editTransaction = async  (req, res) => {
+  try {
+    const { idTransaction } = req.params
+    const { _id } = res.locals.user
+
+    const updated = await modelTransaction.updateOne({ _id: idTransaction }, { ...req.body })
+
+    if(updated.modifiedCount < 1) {
+      return res.status(422).json({ error: 'transação não atualizada, tente novamente'})
+    }
+
+    res.status(200).json({message: true})
+  } catch (error) {
+    res.status(500).json({ error: 'internal server error' })
+  }
+}
