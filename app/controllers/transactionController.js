@@ -8,6 +8,21 @@ import transactionValidate from '../validation/transaction.js'
 import  validation from '../utils/error-message.js'
 
 
+export const listTransaction = async (req, res) => {
+  try {
+  
+    const { _id } = res.locals.user
+
+    const transaction = await modelTransaction.find({ user_id_transaction: _id })
+
+    res.status(201).json(transaction)
+
+
+  } catch (error) {
+    res.status(500).json({ error: 'internal server error' })
+  }
+}
+
 export const addEntry = async (req, res) => {
   try {
     const { value, description } = req.body
