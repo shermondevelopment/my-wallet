@@ -23,6 +23,25 @@ export const listTransaction = async (req, res) => {
   }
 }
 
+export const listTransactionById = async (req, res) => {
+  try {
+  
+    const { _id } = res.locals.user
+    const { idTransaction } = req.params
+
+    const transaction = await modelTransaction.findOne({ user_id_transaction: _id,  _id: idTransaction  }, )
+
+    if(!transaction) {
+      return res.status(404).json({ message: 'transação não encontrada' })
+    }
+
+    res.status(200).json(transaction)
+
+  } catch (error) {
+    res.status(500).json({ error: 'internal server error' })
+  }
+}
+
 export const addEntry = async (req, res) => {
   try {
     const { value, description } = req.body
