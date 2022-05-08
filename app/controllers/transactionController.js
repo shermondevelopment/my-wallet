@@ -58,9 +58,13 @@ export const deleteTransaction = async  (req, res) => {
       const { idTransaction } = req.params
       const { _id } = res.locals.user
 
-      await modelTransaction.findOneAndDelete({ _id: idTransaction }, { user_id_transaction: _id })
+      const deleted = await modelTransaction.deleteOne({ _id: idTransaction }, { user_id_transaction: _id })
+      
+      if(deleted.deletedCount < 1) {
+        return res.status(422).json({ error: 'transação não encontrada, tente novamente'})
+      }
+
       res.status(200).json({message: true})
-      res.status(200).send('deleted')
     } catch (error) {
       res.status(500).json({ error: 'internal server error' })
     }
