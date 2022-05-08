@@ -15,7 +15,17 @@ export const listTransaction = async (req, res) => {
 
     const transaction = await modelTransaction.find({ user_id_transaction: _id })
 
-    res.status(200).json(transaction)
+    let entry = 0;
+    let exit = 0;
+    transaction.forEach( item => {
+      if(item.is_entry) {
+        entry += item.value
+      } else {
+        exit += item.value
+      }
+    } )
+
+    res.status(200).json({ transactions: transaction, balance: entry - exit})
 
 
   } catch (error) {

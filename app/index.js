@@ -1,3 +1,6 @@
+/* dotenv*/
+import 'dotenv/config'
+
 import express, { json } from 'express'
 
 /* connect mongoose */
